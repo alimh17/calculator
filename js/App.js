@@ -8,27 +8,7 @@ const showNumbers = (e) => {
 
     show.value += e.target.textContent;
 
-    if (show.value.slice(plusIndex) === "+") {
-      result.value = show.value;
-      show.value = show.value.slice(0, plusIndex);
-    }
-    if (show.value.slice(plusIndex) === "\u2212") {
-      result.value = show.value;
-      show.value = show.value.slice(0, minIndex);
-    }
-
-    if (result.value.length > 0 && e.target.value === "-") {
-      result.value = show.value;
-      show.value = show.value.slice(0, plusIndex);
-    }
-    if (result.value.length > 0 && e.target.value === "*") {
-      result.value = show.value;
-      show.value = show.value.slice(0, plusIndex);
-    }
-    if (result.value.length > 0 && e.target.value === "/") {
-      result.value = show.value;
-      show.value = show.value.slice(0, plusIndex);
-    }
+    
 
 
 
