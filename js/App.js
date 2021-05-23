@@ -2,98 +2,37 @@
 
 const showNumbers = (e) => {
   if (e.target.classList.contains("opt")) {
-    // let str = "";
-    // let res = 0;
-    // let oprt = "";
-    // let numOne = 0;
-    // let numTwo = 0;
-    let plusArr , minArr , optBtn;
-    show.value += e.target.textContent;
     //find Plus Index of show value
     const plusIndex = show.value.lastIndexOf("+");
     const minIndex = show.value.lastIndexOf("\u2212");
 
+    show.value += e.target.textContent;
 
-    if(show.value.charAt(plusIndex) === "+"){
-      plusArr = show.value.split("+") 
-
-
-      if (plusArr[2]) {
-        result.value = +plusArr[0] + +plusArr[1];
-        show.value = "";
-        plusArr = [];
-        plusArr[0] = result.value;
-        show.value = result.value;
-      }
+    if (show.value.slice(plusIndex) === "+") {
+      result.value = show.value;
+      show.value = show.value.slice(0, plusIndex);
+    }
+    if (show.value.slice(plusIndex) === "\u2212") {
+      result.value = show.value;
+      show.value = show.value.slice(0, minIndex);
     }
 
-    if(show.value.charAt(minIndex) === "\u2212"){
-
-      console.log("yes");
-      
-      let minArr = show.value.split("\u2212")
-      if (minArr[2]) {
-        result.value = +minArr[0] - +minArr[1];
-        show.value = "";
-        minArr = [];
-        minArr[0] = result.value;
-        show.value = result.value;
-      }
-
+    if (result.value.length > 0 && e.target.value === "-") {
+      result.value = show.value;
+      show.value = show.value.slice(0, plusIndex);
+    }
+    if (result.value.length > 0 && e.target.value === "*") {
+      result.value = show.value;
+      show.value = show.value.slice(0, plusIndex);
+    }
+    if (result.value.length > 0 && e.target.value === "/") {
+      result.value = show.value;
+      show.value = show.value.slice(0, plusIndex);
     }
 
 
 
 
-    if (show.value.charAt(plusIndex) === "+") {
-      let optBtn = document.querySelectorAll(".oparators > button");
-
-      optBtn.forEach((item) => {
-        item.disabled = true;
-      });
-    }
-    if (show.value.charAt(minIndex) === "\u2212") {
-      optBtn = document.querySelectorAll(".oparators > button");
-
-      optBtn.forEach((item) => {
-        item.disabled = true;
-      });
-    }
-
-
-    document.querySelector(".equl").addEventListener("click", () => {
-      
-      optBtn = document.querySelectorAll(".oparators > button");
-      optBtn.forEach((item) => {
-        item.disabled = false;
-      });
-
-
-        
-  
-        if (plusArr[2]) {
-          result.value = +plusArr[0] + +plusArr[1];
-          show.value = "";
-          plusArr = [];
-          plusArr[0] = result.value;
-          show.value = result.value;
-        }
-
-      // result.value = +plusArr[0] + +plusArr[1];
-      // show.value = "";
-      // plusArr = [];
-      // plusArr[0] = result.value;
-      // show.value = result.value;
-
-      // result.value = +minArr[0] - +minArr[1];
-      // show.value = "";
-      // minArr = [];
-      // minArr[0] = result.value;
-      // show.value = result.value;
-
-      // console.log(minArr);
-
-    });
   }
 
   if (e.target.classList.contains("clean")) {
