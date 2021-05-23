@@ -2,26 +2,99 @@
 
 const showNumbers = (e) => {
   if (e.target.classList.contains("opt")) {
+    // let str = "";
+    // let res = 0;
+    // let oprt = "";
+    // let numOne = 0;
+    // let numTwo = 0;
+    let plusArr , minArr , optBtn;
     show.value += e.target.textContent;
-    const str = show.value.substring(show.value.length - 1);
     //find Plus Index of show value
     const plusIndex = show.value.lastIndexOf("+");
+    const minIndex = show.value.lastIndexOf("\u2212");
 
-    //add Numbers to list
 
-    oprators.forEach((opt) => {
-      if (str === opt) {
-        //Add show value to result
-        result.value = show.value.slice(0, show.value.length - 1);
+    if(show.value.charAt(plusIndex) === "+"){
+      plusArr = show.value.split("+") 
+
+
+      if (plusArr[2]) {
+        result.value = +plusArr[0] + +plusArr[1];
+        show.value = "";
+        plusArr = [];
+        plusArr[0] = result.value;
+        show.value = result.value;
       }
+    }
+
+    if(show.value.charAt(minIndex) === "\u2212"){
+
+      console.log("yes");
+      
+      let minArr = show.value.split("\u2212")
+      if (minArr[2]) {
+        result.value = +minArr[0] - +minArr[1];
+        show.value = "";
+        minArr = [];
+        minArr[0] = result.value;
+        show.value = result.value;
+      }
+
+    }
+
+
+
+
+    if (show.value.charAt(plusIndex) === "+") {
+      let optBtn = document.querySelectorAll(".oparators > button");
+
+      optBtn.forEach((item) => {
+        item.disabled = true;
+      });
+    }
+    if (show.value.charAt(minIndex) === "\u2212") {
+      optBtn = document.querySelectorAll(".oparators > button");
+
+      optBtn.forEach((item) => {
+        item.disabled = true;
+      });
+    }
+
+
+    document.querySelector(".equl").addEventListener("click", () => {
+      
+      optBtn = document.querySelectorAll(".oparators > button");
+      optBtn.forEach((item) => {
+        item.disabled = false;
+      });
+
+
+        
+  
+        if (plusArr[2]) {
+          result.value = +plusArr[0] + +plusArr[1];
+          show.value = "";
+          plusArr = [];
+          plusArr[0] = result.value;
+          show.value = result.value;
+        }
+
+      // result.value = +plusArr[0] + +plusArr[1];
+      // show.value = "";
+      // plusArr = [];
+      // plusArr[0] = result.value;
+      // show.value = result.value;
+
+      // result.value = +minArr[0] - +minArr[1];
+      // show.value = "";
+      // minArr = [];
+      // minArr[0] = result.value;
+      // show.value = result.value;
+
+      // console.log(minArr);
+
     });
-
-
-
-
-
   }
-
 
   if (e.target.classList.contains("clean")) {
     show.value = "";
